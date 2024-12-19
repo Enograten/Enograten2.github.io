@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Casino India</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Animate.css for Animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- AOS (Animate On Scroll) for Scroll Animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+    <!-- Compiled CSS -->
+    <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="container">
+            <a class="logo" href="/">Domain</a>
+            <nav>
+                <ul>
+                    <li><a href="#slots">Games</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+  <section class="contact-us">
+    <div class="container">
+        <h1>Contact Us</h1>
+        <p>If you have any questions or inquiries, feel free to get in touch with us using the form below.</p>
+        <form id="contactForm" class="contact-form">
+            <div class="form-group">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Your Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn">Send Message</button>
+        </form>
+    </div>
+</section>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const contactForm = document.getElementById("contactForm");
+    const thankYouModal = document.getElementById("thankYouModal");
+    const closeModal = document.querySelector(".close");
+
+    // Устанавливаем модальное окно как скрытое при загрузке страницы
+    thankYouModal.style.display = "none";
+
+    contactForm.addEventListener("submit", function(event) {
+        event.preventDefault(); // Останавливаем отправку формы
+
+        // Показываем Thank You Modal только после успешной отправки формы
+        thankYouModal.style.display = "flex";
+
+        // Очищаем форму после отправки
+        contactForm.reset();
+    });
+
+    // Закрываем модальное окно при нажатии на "X"
+    closeModal.addEventListener("click", function() {
+        thankYouModal.style.display = "none";
+    });
+
+    // Закрываем модальное окно при нажатии вне его области
+    window.addEventListener("click", function(event) {
+        if (event.target === thankYouModal) {
+            thankYouModal.style.display = "none";
+        }
+    });
+});
+</script>
+<div id="thankYouModal" class="modal" style="display: none;"> <!-- Убедитесь, что модальное окно скрыто изначально -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Thank You!</h2>
+        <p>Your message has been sent successfully.</p>
+    </div>
+</div>
+
+
+  <footer class="footer">
+    <nav>
+        <ul>
+            <li><a href="/">Domain</a></li>
+            <li><a href="/#slots">Slots</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/privacy/">Privacy Policy</a></li>
+            <li><a href="/terms/">Terms of Service</a></li>
+        </ul>
+    </nav>
+    <div class="disclaimer">
+        <h4>Disclaimer +18</h4>
+        <p>Domain provides entertainment services only. All games on this platform are free to play
+            and do not require the use of real money. We do not offer the opportunity to win real cash prizes or
+            exchange game points for real money.</p>
+        <p>Domain is intended for adult users (18+) only. Please remember that success in our
+            social casino games does not guarantee success in real gambling. All bets and winnings are virtual and
+            have no real value.</p>
+    </div>
+    <div class="responsible-gaming_footer">
+        <a href="https://begambleaware.org"><img src="/assets/img/gamble_aware.png" alt="BeGambleAware"></a>
+        <a href="https://www.gamstop.co.uk/"><img src="/assets/img/gam-stop-removebg-preview.png" alt="GamStop"></a>
+        <a href="https://www.gamcare.org.uk/"><img src="/assets/img/gam-care.png" alt="GamCare"></a>
+    </div>
+    <p>© 2024 Domain.com. All Rights Reserved.</p>
+</footer>
+</body>
+</html>

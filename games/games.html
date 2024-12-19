@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Casino India</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Animate.css for Animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- AOS (Animate On Scroll) for Scroll Animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+    <!-- Compiled CSS -->
+    <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="container">
+            <a class="logo" href="/">Domain</a>
+            <nav>
+                <ul>
+                    <li><a href="#slots">Games</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+<body>
+    <div class="game_page">
+        <div class="container">
+            <iframe id="gameIframe" src="" frameborder="0" width="80%" height="80%"></iframe>
+        </div>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const game = urlParams.get('game');
+
+        const games = {
+            sweet: 'https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=vs20fruitswx&websiteUrl=https%3A%2F%2Fdemogamesfree.pragmaticplay.net&jurisdiction=99&lobby_url=https%3A%2F%2Fwww.pragmaticplay.com%2Fen%2F',
+            gates: 'https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=vs20olympx&websiteUrl=https%3A%2F%2Fdemogamesfree.pragmaticplay.net&jurisdiction=99&lobby_url=https%3A%2F%2Fwww.pragmaticplay.com%2Fen%2F',
+            doghouse: 'https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=vs20doghouse2&websiteUrl=https%3A%2F%2Fdemogamesfree.pragmaticplay.net&jurisdiction=99&lobby_url=https%3A%2F%2Fwww.pragmaticplay.com%2Fen%2F',
+            buffalo: 'https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=vs10bbbrlact&websiteUrl=https%3A%2F%2Fdemogamesfree.pragmaticplay.net&jurisdiction=99&lobby_url=https%3A%2F%2Fwww.pragmaticplay.com%2Fen%2F',
+            dog: 'https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=vs20doghouse2&websiteUrl=https%3A%2F%2Fdemogamesfree.pragmaticplay.net&jurisdiction=99&lobby_url=https%3A%2F%2Fwww.pragmaticplay.com%2Fen%2F',
+            bass: 'https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=vs10bbbrlact&websiteUrl=https%3A%2F%2Fdemogamesfree.pragmaticplay.net&jurisdiction=99&lobby_url=https%3A%2F%2Fwww.pragmaticplay.com%2Fen%2F',
+            sugar: 'https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=vs20sugarrushx&websiteUrl=https%3A%2F%2Fdemogamesfree.pragmaticplay.net&jurisdiction=99&lobby_url=https%3A%2F%2Fwww.pragmaticplay.com%2Fen%2F',
+            hand: 'https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=vs20midas2&websiteUrl=https%3A%2F%2Fdemogamesfree.pragmaticplay.net&jurisdiction=99&lobby_url=https%3A%2F%2Fwww.pragmaticplay.com%2Fen%2F',
+            wildies: 'https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=vs25wildies&websiteUrl=https%3A%2F%2Fdemogamesfree.pragmaticplay.net&jurisdiction=99&lobby_url=https%3A%2F%2Fwww.pragmaticplay.com%2Fen%2F',
+            buffalo: 'https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=vswaysbkingasc&websiteUrl=https%3A%2F%2Fdemogamesfree.pragmaticplay.net&jurisdiction=99&lobby_url=https%3A%2F%2Fwww.pragmaticplay.com%2Fen%2F'
+        };
+
+        if (games[game]) {
+            document.getElementById('gameIframe').src = games[game];
+        }
+    </script>
+    <footer class="footer">
+      <nav>
+          <ul>
+              <li><a href="/">Domain</a></li>
+              <li><a href="#slots">Slots</a></li>
+              <li><a href="/about/">About</a></li>
+              <li><a href="/privacy/">Privacy Policy</a></li>
+              <li><a href="/terms/">Terms of Service</a></li>
+          </ul>
+      </nav>
+      <div class="disclaimer">
+          <h4>Disclaimer +18</h4>
+          <p>Domain provides entertainment services only. All games on this platform are free to play
+              and do not require the use of real money. We do not offer the opportunity to win real cash prizes or
+              exchange game points for real money.</p>
+          <p>Domain is intended for adult users (18+) only. Please remember that success in our
+              social casino games does not guarantee success in real gambling. All bets and winnings are virtual and
+              have no real value.</p>
+      </div>
+      <div class="responsible-gaming_footer">
+          <a href="https://begambleaware.org"><img src="/assets/img/gamble_aware.png" alt="BeGambleAware"></a>
+          <a href="https://www.gamstop.co.uk/"><img src="/assets/img/gam-stop-removebg-preview.png" alt="GamStop"></a>
+          <a href="https://www.gamcare.org.uk/"><img src="/assets/img/gam-care.png" alt="GamCare"></a>
+      </div>
+      <p>© 2024 Domain.com. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>

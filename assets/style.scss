@@ -1,0 +1,1198 @@
+/* ======= Переменные ======= */
+@mixin OnDeskTop {
+    @media (max-width: 1440px) {
+        @content;
+    }
+  }
+  
+  @mixin OnTablet {
+    @media (max-width: 1024px) {
+        @content;
+    }
+  }
+  
+  @mixin OnMobile {
+    @media (max-width: 768px) {
+        @content;
+    }
+  }
+  
+  @mixin OnSmallMobile {
+    @media (max-width: 480px) {
+        @content;
+    }
+  }
+
+html {
+    scroll-behavior: smooth;
+  }
+// Палитра цветов
+$primary-color: #00FFFF; // Cyan Neon
+$secondary-color: #FF00FF; // Magenta Neon
+$accent-color: #FF9900; // Orange Neon
+$background-color: #0D0D0D; // Темный фон
+$text-color: #FFFFFF; // Белый текст
+$subtext-color: #B3B3B3; // Блеклый текст
+$footer-bg-color: #1A1A1A;
+
+// Шрифты
+$heading-font: 'Orbitron', sans-serif;
+$body-font: 'Roboto', sans-serif;
+
+// Адаптивные брейкпоинты
+$breakpoint-mobile: 768px;
+
+/* ======= Миксины ======= */
+
+// Миксин для стилей кнопок
+@mixin button-style {
+  padding: 12px 24px;
+  background-color: $primary-color;
+  border: none;
+  color: $background-color;
+  cursor: pointer;
+  font-size: 1em;
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px $primary-color;
+
+  &:hover {
+    background-color: $secondary-color;
+    box-shadow: 0 0 20px $secondary-color;
+  }
+}
+
+// Миксин для заголовков секций
+@mixin section-title {
+  font-family: $heading-font;
+  font-size: 2.5em;
+  color: $primary-color;
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+
+  &::after {
+    content: '';
+    width: 60px;
+    height: 3px;
+    background-color: $secondary-color;
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+}
+
+// Миксин для текстов с эффектом свечения
+@mixin glow-text($color) {
+    color: $color;
+    text-shadow:
+      0 0 3px $color,  // Уменьшаем интенсивность свечения
+      0 0 6px $color,  // Уменьшаем дальность свечения
+      0 0 12px rgba($color, 0.8),  // Используем прозрачность для ослабления эффекта
+      0 0 24px rgba($color, 0.6);  // Более слабый внешний слой свечения
+  }
+
+// Миксин для навигационных ссылок
+@mixin nav-link {
+  color: $subtext-color;
+  text-decoration: none;
+  font-size: 1em;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+
+  &:hover {
+    color: $primary-color;
+    text-shadow:
+      0 0 5px $primary-color,
+      0 0 10px $primary-color;
+  }
+}
+
+/* ======= Глобальные стили ======= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $body-font;
+  background-color: $background-color;
+  color: $text-color;
+  line-height: 1.6;
+}
+
+/* ======= Навигационная Панель ======= */
+
+.navbar {
+    background-color: rgba(13, 13, 13, 0.9); // Полупрозрачный темный фон
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); // Тень под навигацией
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px 30px;
+  
+    .container {
+      display: flex;
+      justify-content: space-around; // Логотип и навигация по краям
+      align-items: center;
+      width: 100%;
+    }
+  
+    .logo {
+      font-family: $heading-font;
+      font-size: 1.5em;
+      color: $primary-color;
+      text-decoration: none;
+      @include glow-text($primary-color); // Добавление эффекта свечения текста
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+  
+      &:hover {
+        color: $secondary-color;
+        text-shadow: 0 0 5px $secondary-color, 0 0 10px $secondary-color;
+      }
+    }
+  
+    nav {
+      ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+  
+        li {
+          a {
+            @include nav-link; // Миксин для стилизации ссылок
+          }
+        }
+      }
+    }
+  
+    /* Адаптивная навигация для планшетов */
+    @media (max-width: 1024px) { 
+      padding: 10px 20px;
+  
+      .container {
+        justify-content: space-between;
+      }
+  
+      nav ul {
+        gap: 15px;
+      }
+    }
+  
+    /* Адаптивная навигация для мобильных устройств */
+    @media (max-width: 768px) { 
+      padding: 10px 15px;
+      flex-direction: column; // Навигация в колонку
+  
+      .container {
+        flex-direction: column;
+        align-items: center; // Центрируем элементы внутри контейнера
+      }
+  
+      .logo {
+        text-align: center; // Логотип по центру
+        margin-bottom: 15px;
+      }
+  
+      nav {
+        ul {
+          flex-direction: row; // Ссылки в одну линию
+          justify-content: center;
+          gap: 10px; // Уменьшаем расстояние между ссылками для мобильных
+        }
+  
+        li a {
+          padding: 8px 15px; // Увеличиваем кликабельную зону ссылок
+        }
+      }
+    }
+  
+    /* Адаптивная навигация для самых маленьких экранов */
+    @media (max-width: 480px) { 
+      padding: 8px 10px;
+  
+      .logo {
+        font-size: 1.2em; // Уменьшаем размер логотипа
+      }
+  
+      nav ul {
+        gap: 8px;
+      }
+  
+      li a {
+        padding: 8px 10px;
+      }
+    }
+  }
+  
+
+/* ======= Героическая Секция ======= */
+
+.hero {
+    position: relative;
+    height: 600px;
+    background: url('/assets/img/hero.webp') no-repeat center center/cover; // Замените на ваш путь к изображению
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+    }
+  
+    .content {
+      position: relative;
+      z-index: 1;
+  
+      h1 {
+        @include glow-text($primary-color);
+        font-family: $heading-font;
+        font-size: 3em;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+      }
+  
+      p {
+        font-size: 1.2em;
+        margin-bottom: 30px;
+        color: #ffffff;
+      }
+  
+      .btn {
+        @include button-style;
+      }
+    }
+  
+    /* Адаптивная высота для мобильных устройств */
+    @media (max-width: 768px) {
+        img{
+            height: 500px; // Обрезаем высоту до 500px на мобильных устройствах
+        }
+      height: 500px; // Обрезаем высоту до 500px на мобильных устройствах
+  
+      .content {
+        h1 {
+          font-size: 2em; // Уменьшаем заголовок на мобильных устройствах
+        }
+  
+        p {
+          font-size: 1em; // Уменьшаем текст абзаца
+        }
+      }
+    }
+  }
+
+/* ======= Секции ======= */
+
+.section {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  &.features, &.games, &.how-to, &.testimonials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .section-title {
+    @include section-title;
+  }
+
+  .features-container, .games-container, .how-to-container, .testimonials-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .feature-card, .game-card, .how-to-step, .testimonial-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 20px $primary-color;
+    }
+
+    img {
+      width: 260px;
+      height: 260px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    h3 {
+      font-family: $heading-font;
+      font-size: 1.5em;
+      color: $secondary-color;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: $subtext-color;
+    }
+
+    &.testimonial-card {
+      text-align: center;
+
+      img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin: 0 auto 10px;
+      }
+
+      p {
+        font-style: italic;
+      }
+    }
+  }
+}
+
+/* ======= Футер ======= */
+
+.footer {
+  background-color: $footer-bg-color;
+  color: $subtext-color;
+  padding: 40px 20px;
+  text-align: center;
+
+  nav {
+    ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 20px;
+
+      li {
+        a {
+          color: $subtext-color;
+          text-decoration: none;
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+
+  .disclaimer {
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: left;
+
+    h4 {
+      margin-bottom: 10px;
+      color: $primary-color;
+    }
+
+    p {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+  }
+
+  .responsible-gaming_footer {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    a {
+      img {
+        width: 100px;
+        height: 100px;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+
+        @media (max-width: $breakpoint-mobile) {
+          width: 80px;
+        }
+      }
+    }
+  }
+
+  p {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: $subtext-color;
+  }
+}
+
+/* ======= Адаптивные стили ======= */
+
+@media (max-width: $breakpoint-mobile) {
+  .navbar {
+    padding: 10px 20px;
+  }
+
+  .section {
+    padding: 60px 20px;
+
+    .section-title {
+      font-size: 2em;
+    }
+  }
+
+  .hero {
+    .content {
+      h1 {
+        font-size: 2.5em;
+      }
+
+      p {
+        font-size: 1em;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        font-size: 0.9em;
+      }
+    }
+  }
+
+  .footer .responsible-gaming_footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+.games-catalog {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #0d0d0d, #1a1a1a); /* Темный киберпанковский фон */
+    text-align: center;
+  
+    h2 {
+      font-family: 'Orbitron', sans-serif; /* Футуристический шрифт */
+      font-size: 48px;
+      margin-bottom: 20px;
+      color: #00ffff; /* Яркий неоновый цвет */
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff; /* Свечение */
+    }
+  
+    p {
+      font-family: 'Roboto', sans-serif;
+      font-size: 30px;
+      color: #b3b3b3; /* Светло-серый текст */
+      margin-bottom: 50px;
+    }
+  
+    .slots_container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* Центрируем блоки */
+      gap: 30px;
+    }
+  
+    .item {
+      width: 22%;
+      background-color: #111111; /* Темный фон для карточек */
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6); /* Тень для карточек */
+  
+      &:hover {
+        transform: translateY(-15px);
+        box-shadow: 0px 20px 40px rgba(0, 255, 255, 0.5); /* Неоновая тень */
+      }
+  
+      p {
+        margin: 10px 0;
+        font-size: 16px;
+        color: #00ffff; /* Неоновый цвет для текста */
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 0 0 5px #00ffff; /* Свечение текста */
+      }
+  
+      .for_img {
+        position: relative;
+        overflow: hidden;
+  
+        img {
+          width: 500px;
+          height: 500px;
+          border-radius: 15px;
+          transition: transform 0.4s ease, filter 0.4s ease;
+        }
+  
+        .hovered_info {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(45deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4)); /* Градиент */
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          opacity: 0;
+          transition: opacity 0.4s ease;
+  
+          a {
+            background-color: #00ffff; /* Неоновый цвет кнопки */
+            padding: 12px 25px;
+            border-radius: 30px;
+            color: #0d0d0d; /* Темный цвет текста */
+            text-transform: uppercase;
+            font-weight: bold;
+            box-shadow: 0px 4px 15px rgba(0, 255, 255, 0.8); /* Тень для кнопки */
+            transition: transform 0.4s ease, background-color 0.4s ease;
+  
+            &:hover {
+              background-color: #ff00ff; /* Неон розовый при наведении */
+              transform: scale(1.1);
+            }
+          }
+        }
+  
+        &:hover img {
+          transform: scale(1.2);
+          filter: brightness(0.6); /* Затемнение изображения при наведении */
+        }
+  
+        &:hover .hovered_info {
+          opacity: 1;
+        }
+      }
+    }
+  
+    /* Адаптив для планшетов */
+    @media (max-width: 1024px) {
+      h2 {
+        font-size: 36px; /* Уменьшение размера заголовка */
+      }
+
+      p {
+        font-size: 24px; /* Уменьшение размера текста */
+      }
+
+      .item {
+        width: 45%; /* Карточки занимают 45% ширины на планшетах */
+      }
+    }
+  
+    /* Адаптив для мобильных устройств */
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 28px; /* Еще меньше заголовок */
+      }
+
+      p {
+        font-size: 20px; /* Уменьшение размера текста */
+      }
+
+      .item {
+        width: 90%; /* Карточки занимают почти всю ширину */
+        margin: 0 auto; /* Центрирование карточек */
+      }
+    }
+
+    /* Адаптив для самых маленьких экранов */
+    @media (max-width: 480px) {
+      h2 {
+        font-size: 24px; /* Заголовок еще меньше */
+      }
+
+      p {
+        font-size: 18px; /* Уменьшаем текст */
+      }
+
+      .item {
+        width: 100%; /* Карточки на всю ширину */
+      }
+    }
+}
+
+  .games-catalog {
+    animation: fadeInUp 1s ease-out;
+  }
+  @keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+  
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+  }
+  .game_page {
+    padding: 0px;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.0) 0%,
+            /* Прозрачный вверху */
+            rgba(0, 0, 0, 0.7) 10%,
+            rgba(0, 0, 0, 0.9) 20%,
+            rgba(0, 0, 0, 0.9) 30%,
+            /* Темнеет к центру */
+            rgba(0, 0, 0, 0.9) 40%,
+            rgba(0, 0, 0, 0.9) 50%,
+            /* Самая темная часть в центре */
+            rgba(0, 0, 0, 0.9) 60%,
+            rgba(0, 0, 0, 0.9) 70%,
+            /* Осветление от центра вниз */
+            rgba(0, 0, 0, 0.9) 80%,
+            rgba(0, 0, 0, 0.7) 90%,
+            rgba(0, 0, 0, 0.0) 100%
+            /* Прозрачный внизу */
+        );
+  
+    .container {
+        width: 100vw;
+        max-width: 100%;
+        height: 1000px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+  
+    @media screen and (max-width: 1024px) {
+        .container {
+            height: 800px;
+        }
+    }
+  
+    @media screen and (max-width: 768px) {
+        .container {
+            height: 700px;
+        }
+    }
+  
+    @media screen and (max-width: 425px) {
+        .container {
+            height: 600px;
+            padding: 0 20px;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+  
+        background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.0) 0%,
+            /* Прозрачный вверху */
+            rgba(0, 0, 0, 0.6) 10%,
+            /* Осветляем градиент */
+            rgba(0, 0, 0, 0.8) 20%,
+            rgba(0, 0, 0, 0.8) 50%,
+            rgba(0, 0, 0, 0.8) 70%,
+            rgba(0, 0, 0, 0.6) 90%,
+            rgba(0, 0, 0, 0.0) 100%
+            /* Прозрачный внизу */
+        );
+    }
+  
+    @media screen and (max-width: 375px) {
+        .container {
+            height: 550px;
+            padding: 0 20px;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+  
+        background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.0) 0%,
+            /* Прозрачный вверху */
+            rgba(0, 0, 0, 0.55) 10%,
+            /* Осветляем градиент */
+            rgba(0, 0, 0, 0.75) 20%,
+            rgba(0, 0, 0, 0.75) 50%,
+            rgba(0, 0, 0, 0.75) 70%,
+            rgba(0, 0, 0, 0.55) 90%,
+            rgba(0, 0, 0, 0.0) 100%
+            /* Прозрачный внизу */
+        );
+    }
+  
+    @media screen and (max-width: 320px) {
+        .container {
+            height: 500px;
+            padding: 0 15px;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+  
+        background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.0) 0%,
+            /* Прозрачный вверху */
+            rgba(0, 0, 0, 0.5) 10%,
+            /* Осветляем градиент, чтобы избежать слишком темного экрана */
+            rgba(0, 0, 0, 0.7) 20%,
+            rgba(0, 0, 0, 0.7) 30%,
+            rgba(0, 0, 0, 0.7) 50%,
+            rgba(0, 0, 0, 0.7) 70%,
+            rgba(0, 0, 0, 0.5) 90%,
+            rgba(0, 0, 0, 0.0) 100%
+            /* Прозрачный внизу */
+        );
+    }
+  }
+  .contact-us {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    position: relative;
+  
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный слой для затемнения */
+      z-index: 0;
+    }
+  
+    .container {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      width: 50%;
+      text-align: center;
+  
+      h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        color: #ffd700;
+      }
+  
+      p {
+        font-size: 18px;
+        margin-bottom: 30px;
+        color: #ffd700;
+      }
+  
+      .contact-form {
+        display: flex;
+        flex-direction: column;
+  
+        .form-group {
+          margin-bottom: 20px;
+          text-align: left;
+  
+          label {
+            display: block;
+            margin-bottom: 5px;
+            color: #fff;
+          }
+  
+          input, textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            color: #333;
+            resize: none; /* Запрещаем изменять размер текстового поля */
+          }
+  
+          input {
+            height: 40px;
+          }
+  
+          textarea {
+            resize: none; /* Запрещаем изменение размера текстового поля */
+          }
+        }
+  
+        .btn {
+          padding: 10px 20px;
+          background-color: #ffd700;
+          color: #32004e;
+          font-size: 18px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background 0.3s ease;
+  
+          &:hover {
+            background-color: #e0b600;
+          }
+        }
+      }
+    }
+  }
+  
+  /* Thank You Modal */
+  .modal {
+    display: none; /* Убедитесь, что модальное окно скрыто по умолчанию */
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 50%;
+  }
+  
+  .modal-content h2 {
+    color: #32004e;
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  
+  .modal-content p {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+  }
+  
+  /* Адаптивность */
+  @include OnMobile {
+    .contact-us {
+      .container {
+        width: 90%;
+        padding: 20px;
+  
+        h1 {
+          font-size: 36px;
+        }
+  
+        p {
+          font-size: 16px;
+        }
+  
+        .contact-form {
+          .form-group input, .form-group textarea {
+            font-size: 14px;
+          }
+  
+          .btn {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+  $primary-color: #00FFFF; /* Cyan Neon */
+$secondary-color: #FF00FF; /* Magenta Neon */
+$tertiary-color: #39FF14; /* Neon Green */
+$background-color: #0d0d0d; /* Dark Background */
+$text-color: #ffffff;
+$subtext-color: #b3b3b3;
+$font-heading: 'Orbitron', sans-serif;
+$font-body: 'Roboto', sans-serif;
+  .about-us {
+    .about-content {
+        display: flex;
+        justify-content: space-between;
+        gap: 30px;
+
+        .about-text {
+            width: 55%;
+
+            p {
+                font-size: 18px;
+                color: $subtext-color;
+                margin-bottom: 20px;
+                text-align: justify;
+            }
+        }
+
+        .about-images {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            .about-img {
+                width: 100%;
+                border-radius: 15px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+                transition: transform 0.4s ease;
+
+                &:hover {
+                    transform: scale(1.05);
+                    box-shadow: 0 0 30px $primary-color;
+                }
+            }
+        }
+    }
+}
+
+/* Background animation */
+.animated-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+
+    .circle {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.6;
+        animation: move 20s linear infinite;
+    }
+
+    .neon-blue {
+        width: 150px;
+        height: 150px;
+        background-color: $primary-color;
+        top: 10%;
+        left: 20%;
+    }
+
+    .neon-pink {
+        width: 200px;
+        height: 200px;
+        background-color: $secondary-color;
+        top: 50%;
+        left: 70%;
+    }
+
+    .neon-green {
+        width: 100px;
+        height: 100px;
+        background-color: $tertiary-color;
+        top: 80%;
+        left: 10%;
+    }
+}
+
+/* Keyframes for animated circles */
+@keyframes move {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-100px) rotate(180deg);
+    }
+    100% {
+        transform: translateY(0) rotate(360deg);
+    }
+}
+
+/* AOS Animation */
+[data-aos] {
+    opacity: 0;
+    transition-property: opacity, transform;
+}
+
+[data-aos].aos-animate {
+    opacity: 1;
+}
+
+$primary-color: #00ffff;  /* Cyan Neon */
+$secondary-color: #ff00ff;  /* Magenta Neon */
+$background-color: #0d0d0d;  /* Dark Background */
+$text-color: #ffffff;  /* White text */
+$subtext-color: #b3b3b3;  /* Light gray subtext */
+$heading-font: 'Orbitron', sans-serif;
+
+/* Section: Terms of Service */
+.terms-of-service {
+  padding: 80px 20px;
+  background-color: $background-color;
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-family: $heading-font;
+    font-size: 48px;
+    color: $primary-color;
+    text-align: center;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px $primary-color, 0 0 20px $primary-color;
+  }
+
+  h2 {
+    font-family: $heading-font;
+    font-size: 32px;
+    color: $secondary-color;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px $secondary-color, 0 0 20px $secondary-color;
+  }
+
+  h3 {
+    font-family: $heading-font;
+    font-size: 24px;
+    color: $primary-color;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    text-shadow: 0 0 5px $primary-color, 0 0 10px $primary-color;
+  }
+
+  p {
+    font-size: 18px;
+    color: $subtext-color;
+    margin-bottom: 20px;
+    text-align: justify;
+  }
+
+  /* Lists or Extra Info */
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+
+    li {
+      font-size: 18px;
+      color: $subtext-color;
+      margin-bottom: 10px;
+      padding-left: 20px;
+      position: relative;
+
+      &::before {
+        content: '•';
+        position: absolute;
+        left: 0;
+        color: $primary-color;
+        font-size: 24px;
+      }
+    }
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    padding: 60px 15px;
+
+    h1 {
+      font-size: 36px;
+    }
+
+    h2 {
+      font-size: 28px;
+    }
+
+    h3 {
+      font-size: 22px;
+    }
+
+    p {
+      font-size: 16px;
+    }
+  }
+}
+
+/* Variables */
+  $primary-color: #00ffff; /* Cyan Neon */
+  $secondary-color: #ff00ff; /* Magenta Neon */
+  $background-color: #0d0d0d; /* Dark Background */
+  $text-color: #ffffff; /* White text */
+  $subtext-color: #b3b3b3; /* Light gray subtext */
+  $heading-font: 'Orbitron', sans-serif;
+
+  /* Section: Privacy Policy */
+  .privacy-policy {
+    padding: 80px 20px;
+    background-color: $background-color;
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-family: $heading-font;
+      font-size: 48px;
+      color: $primary-color;
+      text-align: center;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      text-shadow: 0 0 10px $primary-color, 0 0 20px $primary-color;
+    }
+
+    h2 {
+      font-family: $heading-font;
+      font-size: 32px;
+      color: $secondary-color;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px $secondary-color, 0 0 20px $secondary-color;
+    }
+
+    h3 {
+      font-family: $heading-font;
+      font-size: 24px;
+      color: $primary-color;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      text-shadow: 0 0 5px $primary-color, 0 0 10px $primary-color;
+    }
+
+    p {
+      font-size: 18px;
+      color: $subtext-color;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      padding: 60px 15px;
+
+      h1 {
+        font-size: 36px;
+      }
+
+      h2 {
+        font-size: 28px;
+      }
+
+      h3 {
+        font-size: 22px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+    }
+  }
